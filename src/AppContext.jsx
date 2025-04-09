@@ -34,7 +34,7 @@ function AppProvider({children}) {
 function useAppContext() {
   const context = useContext(AppContext)
   if (context === undefined) {
-    throw new Error('useCount must be used within a CountProvider')
+    throw new Error('useAppContext must be used within a AppProvider')
   }
   return context
 }
