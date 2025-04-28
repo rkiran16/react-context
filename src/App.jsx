@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useGetDogs } from "./getDogs";
 import Modal from "./Modal";
+import { createPortal } from "react-dom";
 
 export default function App() {
    const { dogs, isLoading, isError } = useGetDogs();
@@ -93,7 +94,8 @@ export default function App() {
                   );
                })}
          </div>
-         <Modal isOpen={isModalOpen} onClose={onModalClose}>
+         {isModalOpen && createPortal(
+            <Modal isOpen={isModalOpen} onClose={onModalClose}>
             <div>
                <img className="img-overlay" src={dogs[dogIndex].url} alt={dogs[dogIndex].title} />
                <p className="title">{dogs[dogIndex].title}</p>
@@ -136,7 +138,10 @@ export default function App() {
                         })}
                </div>
             </div>
-         </Modal>
+         </Modal>,
+         document.body
+         )}
+         
      </div> 
    );
  }
